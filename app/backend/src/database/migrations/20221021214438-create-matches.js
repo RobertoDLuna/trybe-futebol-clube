@@ -1,8 +1,8 @@
-'use strict';
+'use-strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const matchesTable = await queryInterface.createTable('matches', {
+    const matchesTable = await queryInterface.createTable('matches', { 
       id: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
@@ -34,6 +34,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('matches')
+    await queryInterface.dropTable('matches');
   }
 };
