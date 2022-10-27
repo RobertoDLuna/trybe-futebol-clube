@@ -12,7 +12,7 @@ export default class UserController {
       if (!token) return res.status(401).json({ message: 'Incorrect email or password' });
       res.status(200).json({ token });
     } catch (error) {
-      res.status(401).json({ message: 'All fields must be filled' });
+      res.status(400).json({ message: 'All fields must be filled' });
     }
   }
 

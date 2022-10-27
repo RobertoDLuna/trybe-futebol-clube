@@ -1,40 +1,13 @@
-import { Model, INTEGER, STRING } from 'sequelize';
-import db from '.';
+import { Router } from 'express';
+import UserModel from '../database/models/user.model';
+import UserService from '../services/user.service';
+import UserController from '../controllers/user.controller';
 
-export default class UserModel extends Model {
-  id!: number;
-  username!: string;
-  role!: string;
-  email!: string;
-  password!: string;
-}
+const UserRoutes = Router();
 
-UserModel.init({
-  id: {
-    type: INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  username: {
-    type: STRING,
-    allowNull: false,
-  },
-  role: {
-    type: STRING,
-    allowNull: false,
-  },
-  email: {
-    type: STRING,
-    allowNull: false,
-  },
-  password: {
-    type: STRING,
-    allowNull: false,
-  },
-}, {
-  underscored: true,
-  sequelize: db,
-  modelName: 'users',
-  timestamps: false,
-});
+const userController = new UserController(new UserService(UserModel));
+
+UserRoutes.post('/login', (req, res) => { userController.login(req, res); });
+UserRoutes.get('/login/validate', (req, res) => { userController.validateLogin(req, res); });
+
+export default UserRoutes;
