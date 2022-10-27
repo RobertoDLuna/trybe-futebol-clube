@@ -24,8 +24,8 @@ export default class UserService {
   async validateLogin(auth: string | undefined) {
     if (!auth) throw new Error();
 
-    const decrypted = tokenAuth.decrypt(auth);
-    const user = await this.userModel.findOne({ where: { password: decrypted } });
+    const { data } = tokenAuth.decrypt(auth);
+    const user = await this.userModel.findOne({ where: { password: data.decrypted } });
     return user as UserModel;
   }
 }
