@@ -1,10 +1,10 @@
 import { sign, Secret, verify, JwtPayload } from 'jsonwebtoken';
 import { compareSync } from 'bcryptjs';
-import UserModel from '../database/models/user.model';
+import UserModel from '../models/user.model';
 
 export default class TokenAuth {
   static compare(token: string, password: string): boolean {
-    return compareSync(token, password);
+    return compareSync(password, token);
   }
 
   static encrypt(user: UserModel): string {

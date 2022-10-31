@@ -1,5 +1,5 @@
-import UserModel from '../database/models/user.model';
-import tokenAuth from '../auths/tokenAuth';
+import TokenAuth from '../auths/tokenAuth';
+import UserModel from '../models/user.model';
 import Login from '../interfaces/ILogin';
 
 export default class UserService {
@@ -12,10 +12,10 @@ export default class UserService {
 
     if (!user) return null;
 
-    const validateUserPass = tokenAuth.compare(user.email, user.password);
+    const validateUserPass = TokenAuth.compare(user.email, user.password);
 
     if (validateUserPass) {
-      const token = tokenAuth.encrypt(user);
+      const token = TokenAuth.encrypt(user);
       return token;
     }
     return null;
@@ -24,8 +24,8 @@ export default class UserService {
   async validateLogin(auth: string | undefined) {
     if (!auth) throw new Error();
 
-    const { data } = tokenAuth.decrypt(auth);
-    const user = await this.userModel.findOne({ where: { password: data.decrypted } });
+    const { data } = TokenAuth.decrypt(auth);
+    const user = await this.userModel.findOne({ where: { password: data.password } });
     return user as UserModel;
   }
 }
