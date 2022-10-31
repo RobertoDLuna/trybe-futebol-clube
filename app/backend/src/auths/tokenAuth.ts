@@ -11,8 +11,6 @@ export default class TokenAuth {
     const secret = process.env.JWT_SECRET as Secret;
     const token = sign({ data: user }, secret);
 
-    console.log(token);
-
     return token;
   }
 
