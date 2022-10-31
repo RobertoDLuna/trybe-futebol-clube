@@ -21,7 +21,7 @@ export default class UserService {
     return null;
   }
 
-  async validateLogin(auth: string | undefined) {
+  async loginValidate(auth: string | undefined) {
     if (!auth) throw new Error();
 
     const { data } = TokenAuth.decrypt(auth);

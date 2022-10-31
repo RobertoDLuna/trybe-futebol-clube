@@ -20,7 +20,7 @@ export default class UserController {
   async loginValidate(req: Request, res: Response) {
     try {
       const { authorization } = req.headers;
-      const result = await this.userService.validateLogin(authorization);
+      const result = await this.userService.loginValidate(authorization);
       res.status(200).json({ role: result.role });
     } catch (error) {
       res.status(401).json({ message: 'Ivalid token' });
