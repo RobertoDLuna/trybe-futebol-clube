@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import MatchesService from '../services/Matches.service';
-import MatchesController from '../controllers/Matches.controller';
-import MatchesModel from '../models/Matches.model';
+import MatchesService from '../services/matches.service';
+import MatchesController from '../controllers/matches.controller';
+import MatchesModel from '../models/matches.model';
 
 const MatchesRoutes = Router();
 
