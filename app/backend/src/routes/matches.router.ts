@@ -15,4 +15,6 @@ const matchesController = new MatchesController(new MatchesService(
 
 MatchesRoutes.get('/Matches', (req, res) => matchesController.getAllMatches(req, res));
 
+MatchesRouter.post('/matches', (req, res) => matchesController.saveMatch(req, res));
+
 export default MatchesRoutes;
