@@ -7,9 +7,11 @@ import MatchesModel from '../models/matches.model';
 const LeaderboardRoutes = Router();
 
 const leaderboardController = new LeaderboardController(
-  new LeaderboardController(MatchesModel, TeamsModel),
+  new LeaderboardService(MatchesModel, TeamsModel),
 );
 
 LeaderboardRoutes.get('/leaderboard', (req, res) => leaderboardController.getAll(req, res));
+LeaderboardRoutes.get('/leaderboard/home', (req, res) => leaderboardController.getHome(req, res));
+LeaderboardRoutes.get('/leaderboard/away', (req, res) => leaderboardController.getAway(req, res));
 
 export default LeaderboardRoutes;
