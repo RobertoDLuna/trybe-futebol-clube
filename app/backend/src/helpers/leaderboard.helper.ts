@@ -71,3 +71,9 @@ export function calculateGoalsOwn(matches: IMatch[], teamId: number) {
   }, 0);
   return goalsOwn;
 }
+
+export function calculateGoalsBalance(matches: IMatch[], teamId: number) {
+  const goalsFavor = calculateGoalsFavor(matches, teamId);
+  const goalsOwn = calculateGoalsOwn(matches, teamId);
+  return goalsFavor - goalsOwn;
+}
