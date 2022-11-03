@@ -2,7 +2,10 @@ import TeamsModel from '../models/teams.model';
 import MatchesModel from '../models/matches.model';
 
 export default class MatchesService {
-  constructor(private matchesModel: typeof MatchesModel) {}
+  constructor(
+    private matchesModel: typeof MatchesModel,
+    private teamsModel: typeof TeamsModel,
+  ) {}
 
   async getAllMatches(): Promise <MatchesModel []> {
     const allMatches = await this.matchesModel.findAll({
@@ -23,5 +26,10 @@ export default class MatchesService {
       ],
     });
     return allMatches;
+  }
+
+  async findTeamById(id: number) {
+    const team = await this.teamsModel.findOne({ where: { id } });
+    return team;
   }
 }
