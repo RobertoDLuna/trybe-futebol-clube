@@ -38,3 +38,12 @@ export function calculateTotalVictories(matches: IMatch[], teamId: number) {
   }, 0);
   return totalVictories;
 }
+
+export function calculateTotalDraws(matches: IMatch[], teamId: number) {
+  const totalDraws = matches.reduce((acc, curr) => {
+    if ((curr.homeTeam === teamId || curr.awayTeam === teamId)
+    && curr.homeTeamGoals === curr.awayTeamGoals) return acc + 1;
+    return acc;
+  }, 0);
+  return totalDraws;
+}
