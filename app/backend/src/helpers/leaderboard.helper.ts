@@ -77,3 +77,28 @@ export function calculateGoalsBalance(matches: IMatch[], teamId: number) {
   const goalsOwn = calculateGoalsOwn(matches, teamId);
   return goalsFavor - goalsOwn;
 }
+
+export function calculateTeamEfficiency(matches: IMatch[], teamId: number) {
+  const totalPoints = calculatePoints(matches, teamId);
+  const totalGames = calculateTotalGames(matches, teamId);
+  return +((totalPoints / (totalGames * 3)) * 100).toFixed(2);
+}
+
+export default function generateLeaderboard(matches: IMatch[], teams: TeamsModel[]) {
+  const leaderBoard = teams.map(({ id, teamName }) => {
+    const teamLeaderboard = {
+      name: teamName,
+      totalPoints: calculatePoints(matches, id),
+      totalGames: calculateTotalGames(matches, id),
+      totalVictories: calculateTotalVictories(matches, id),
+      totalDraws: calculateTotalDraws(matches, id),
+      totalLosses: calculateTotalLosses(matches, id),
+      goalsFavor: calculateGoalsFavor(matches, id),
+      goalsOwn: calculateGoalsOwn(matches, id),
+      goalsBalance: calculateGoalsBalance(matches, id),
+      efficiency: calculateTeamEfficiency(matches, id),
+    };
+    return teamLeaderboard;
+  });
+  return sortLeaderboard(leaderBoard);
+}
