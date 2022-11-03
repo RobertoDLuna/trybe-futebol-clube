@@ -7,8 +7,8 @@ export default class MatchesModel extends Model {
   homeTeam!: number;
   homeTeamGoals!: number;
   awayTeam!: number;
-  awayTeamGoals: number;
-  inProgress: number;
+  awayTeamGoals!: number;
+  inProgress!: number;
 }
 
 MatchesModel.init({
