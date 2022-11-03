@@ -47,3 +47,12 @@ export function calculateTotalDraws(matches: IMatch[], teamId: number) {
   }, 0);
   return totalDraws;
 }
+
+export function calculateTotalLosses(matches: Imatch[], teamId: number) {
+  const totalLosses = matches.reduce((acc, curr) => {
+    if (curr.homeTeam === teamId && curr.homeTeamGoals < curr.awayTeamGoals) return acc + 1;
+    if (curr.awayTeam === teamId && curr.awayTeamGoals < curr.homeTeamGoals) return acc + 1;
+    return acc;
+  }, 0);
+  return totalLosses;
+}
