@@ -102,3 +102,27 @@ export default function generateLeaderboard(matches: IMatch[], teams: TeamsModel
   });
   return sortLeaderboard(leaderBoard);
 }
+
+function generateTeamLeaderboard(matches: IMatch[], teamId: number, teamName: string) {
+  const leaderBoard = {
+    name: teamName,
+    totalPoints: calculatePoints(matches, teamId),
+    totalGames: calculateTotalGames(matches, teamId),
+    totalVictories: calculateTotalVictories(matches, teamId),
+    totalDraws: calculateTotalDraws(matches, teamId),
+    totalLosses: calculateTotalLosses(matches, teamId),
+    goalsFavor: calculateGoalsFavor(matches, teamId),
+    goalsOwn: calculateGoalsOwn(matches, teamId),
+    goalsBalance: calculateGoalsBalance(matches, teamId),
+    efficiency: calculateTeamEfficiency(matches, teamId),
+  };
+  return leaderBoard;
+}
+
+export function generateHomeLeaderboard(matches: IMatch[], teams: TeamsModel[]): ILeaderboard[] {
+  const homeLeaderboard = teams.map(({ id, teamName }) => {
+    const filteredTeam = matches.filter((match) => match.homeTeam === id);
+    return generateTeamLeaderboard(filteredTeam, id, teamName);
+  });
+  return sortLeaderboard(homeLeaderboard);
+}
