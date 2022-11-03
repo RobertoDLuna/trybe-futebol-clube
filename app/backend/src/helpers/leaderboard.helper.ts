@@ -48,7 +48,7 @@ export function calculateTotalDraws(matches: IMatch[], teamId: number) {
   return totalDraws;
 }
 
-export function calculateTotalLosses(matches: Imatch[], teamId: number) {
+export function calculateTotalLosses(matches: IMatch[], teamId: number) {
   const totalLosses = matches.reduce((acc, curr) => {
     if (curr.homeTeam === teamId && curr.homeTeamGoals < curr.awayTeamGoals) return acc + 1;
     if (curr.awayTeam === teamId && curr.awayTeamGoals < curr.homeTeamGoals) return acc + 1;
@@ -125,4 +125,12 @@ export function generateHomeLeaderboard(matches: IMatch[], teams: TeamsModel[]):
     return generateTeamLeaderboard(filteredTeam, id, teamName);
   });
   return sortLeaderboard(homeLeaderboard);
+}
+
+export function generateAwayLeaderboard(matches: IMatch[], teams: TeamsModel[]): ILeaderboard[] {
+  const awayLeaderboard = teams.map(({ id, teamName }) => {
+    const filteredTeam = matches.filter((match) => match.awayTeam === id);
+    return generateTeamLeaderboard(filteredTeam, id, teamName);
+  });
+  return sortLeaderboard(awayLeaderboard);
 }
