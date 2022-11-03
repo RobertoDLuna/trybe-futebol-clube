@@ -4,12 +4,12 @@ import LeaderboardController from '../controllers/leaderboard.controller';
 import TeamsModel from '../models/teams.model';
 import MatchesModel from '../models/matches.model';
 
-const LeaderboardRouter = Router();
+const LeaderboardRoutes = Router();
 
 const leaderboardController = new LeaderboardController(
   new LeaderboardController(MatchesModel, TeamsModel),
 );
 
-LeaderboardRouter.get('/leaderboard', (req, res) => leaderboardController.getAll(req, res));
+LeaderboardRoutes.get('/leaderboard', (req, res) => leaderboardController.getAll(req, res));
 
-export default LeaderboardRouter;
+export default LeaderboardRoutes;
