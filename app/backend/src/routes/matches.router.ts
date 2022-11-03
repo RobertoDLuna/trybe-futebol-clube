@@ -16,5 +16,6 @@ const matchesController = new MatchesController(new MatchesService(
 MatchesRoutes.get('/Matches', (req, res) => matchesController.getAllMatches(req, res));
 MatchesRoutes.post('/matches', (req, res) => matchesController.saveMatch(req, res));
 MatchesRoutes.patch('/matches/:id/finish', (req, res) => matchesController.endMatch(req, res));
+MatchesRoutes.patch('/matches/:id', (req, res) => matchesController.updateMatch(req, res));
 
 export default MatchesRoutes;
