@@ -56,3 +56,18 @@ export function calculateTotalLosses(matches: Imatch[], teamId: number) {
   }, 0);
   return totalLosses;
 }
+
+export function calculatePoints(matches: IMatch[], teamId: number) {
+  const victories = calculateTotalVictories(matches, teamId);
+  const draws = calculateTotalDraws(matches, teamId);
+  return victories * 3 + draws;
+}
+
+export function calculateGoalsOwn(matches: IMatch[], teamId: number) {
+  const goalsOwn = matches.reduce((acc, curr) => {
+    if (curr.homeTeam === teamId) return acc + curr.awayTeamGoals;
+    if (curr.awayTeam === teamId) return acc + curr.homeTeamGoals;
+    return acc;
+  }, 0);
+  return goalsOwn;
+}
