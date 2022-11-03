@@ -29,3 +29,12 @@ export function calculateGoalsFavor(matches: IMatch[], teamId: number) {
   }, 0);
   return totalGoals;
 }
+
+export function calculateTotalVictories(matches: IMatch[], teamId: number) {
+  const totalVictories = matches.reduce((acc, curr) => {
+    if (curr.homeTeam === teamId && curr.homeTeamGoals > curr.awayTeamGoals) return acc + 1;
+    if (curr.awayTeam === teamId && curr.awayTeamGoals > curr.homeTeamGoals) return acc + 1;
+    return acc;
+  }, 0);
+  return totalVictories;
+}
