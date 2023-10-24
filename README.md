@@ -8,9 +8,8 @@ Esse projeto é composto de 4 seções principais:
 
 ## Database
   - Comece rodando o comando `npm run build` na pasta do `back-end` para fazer o _build_ da aplicação;
-  - Mantenha o arquivo `/app/backend/src/database/migrations/99999999999999-create-z.js`, pois ele é necessário para a avaliação dos requisitos dessa seção;
 
-- Seção 1: Users e Login
+## Seção 1: Users e Login
 
 <details>
   <summary><strong> Introdução </strong></summary>
